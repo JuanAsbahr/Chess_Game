@@ -31,6 +31,10 @@
 
         public void insertPiece (Piece piece, Position position)
         {
+            if(thereIsPiece(position))
+            {
+                throw new BoardException("There is a piece in this position!");
+            }
             pieces[position.Line, position.Column] = piece;
             piece.position = position;
         }
