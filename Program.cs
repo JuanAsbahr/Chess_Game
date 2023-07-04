@@ -6,19 +6,9 @@ internal class Program
 {
     private static void Main(string[] args)
     {
-        try
-        {
-            Board board = new Board(8, 8);
+        ChessPosition position = new ChessPosition('a', 1);
+        Console.WriteLine(position);
 
-            board.insertPiece(new King(board, Color.Black), new Position(0, 0));
-            board.insertPiece(new Rook(board, Color.Black), new Position(0, 0));
-            board.insertPiece(new King(board, Color.White), new Position(2, 9));
-
-            Screen.printBoard(board);
-        }
-        catch (BoardException e)
-        {
-            Console.WriteLine(e.Message);
-        }
+        Console.WriteLine(position.toPosition());
     }
 }
