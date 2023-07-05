@@ -11,6 +11,12 @@
             this.Column = column;
         }
 
+        public void setValues(int line, int column)
+        {
+            this.Line = line;
+            this.Column = column;
+        }
+
         public override string ToString()
         {
             return Line + " " + Column;

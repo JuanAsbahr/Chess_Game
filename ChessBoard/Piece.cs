@@ -1,6 +1,6 @@
 ﻿namespace Chess_Game.ChessBoard
 {
-    internal class Piece
+    abstract class Piece
     {
         public Position position { get; set; }
         public Color color { get; set; }
@@ -19,5 +19,7 @@
         {
             moves++;
         }
+
+        public abstract bool[,] possibleMoves();
     }
 }
