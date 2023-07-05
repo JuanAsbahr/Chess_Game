@@ -10,7 +10,19 @@ internal class Program
         {
             ChessGame game = new ChessGame();
 
-            Screen.printBoard(game.board);
+            while (!game.finished)
+            {
+                Console.Clear();
+                Screen.printBoard(game.board);
+
+                Console.WriteLine();
+                Console.Write("Origin: ");
+                Position origin = Screen.readPosition().toPosition();
+                Console.Write("Destination: ");
+                Position destination = Screen.readPosition().toPosition();
+
+                game.executeMovement(origin, destination);
+            }
         }
         catch (BoardException e)
         {

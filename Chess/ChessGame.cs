@@ -1,6 +1,5 @@
 ﻿using Chess_Game.ChessBoard;
 using System;
-using System.Security.AccessControl;
 
 namespace Chess_Game.Chess
 {
@@ -9,6 +8,7 @@ namespace Chess_Game.Chess
         public Board board { get; private set; }
         private int round;
         private Color currrentPlayer;
+        public bool finished { get; private set; }
 
         public ChessGame()
         {
@@ -16,6 +16,7 @@ namespace Chess_Game.Chess
             round = 1;
             currrentPlayer = Color.White;
             putPieces(); 
+            finished = false;
         }
 
         public void executeMovement(Position origin, Position destination)

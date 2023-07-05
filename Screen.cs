@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Globalization;
 using System.Security.Cryptography.X509Certificates;
+using Chess_Game.Chess;
 using Chess_Game.ChessBoard;
 
 namespace Chess_Game
@@ -26,6 +28,14 @@ namespace Chess_Game
                 Console.WriteLine();
             }
             Console.WriteLine("  a b c d e f g h");
+        }
+
+        public static ChessPosition readPosition()
+        {
+            string s = Console.ReadLine();
+            char column = s[0];
+            int line = int.Parse(s[1] + "");
+            return new ChessPosition(column, line);
         }
         public static void printPiece(Piece piece)
         {
