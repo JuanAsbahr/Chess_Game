@@ -14,5 +14,10 @@
             this.moves = 0;
             this.board = board;
         }
+
+        public void addMoves()
+        {
+            moves++;
+        }
     }
 }
