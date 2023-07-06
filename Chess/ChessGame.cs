@@ -50,6 +50,14 @@ namespace Chess_Game.Chess
             }
         }
 
+        public void validateDetinationPosition(Position origin, Position destination)
+        {
+            if (!board.piece(origin).canMoveTo(destination))
+            {
+                throw new BoardException("Invalid destination position!");
+            }
+        }
+
         private void changePlayer()
         {
             if(currrentPlayer == Color.White)

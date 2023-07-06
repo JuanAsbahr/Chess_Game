@@ -36,6 +36,11 @@
             return false;
         }
 
+        public bool canMoveTo(Position position)
+        {
+            return possibleMoves()[position.line, position.column];
+        }
+
         public abstract bool[,] possibleMoves();
     }
 }

@@ -34,6 +34,7 @@ internal class Program
                     Console.WriteLine();
                     Console.Write("Destination: ");
                     Position destination = Screen.readPosition().toPosition();
+                    game.validateDetinationPosition(origin, destination);
 
                     game.performMove(origin, destination);
                 }
