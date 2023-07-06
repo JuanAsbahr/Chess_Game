@@ -6,8 +6,8 @@ namespace Chess_Game.Chess
     internal class ChessGame
     {
         public Board board { get; private set; }
-        private int round;
-        private Color currrentPlayer;
+        public int round { get; private set; }
+        public Color currrentPlayer { get; private set; }
         public bool finished { get; private set; }
 
         public ChessGame()
@@ -25,6 +25,25 @@ namespace Chess_Game.Chess
             piece.addMoves();
             Piece caputuredPiece = board.removePiece(destination);
             board.insertPiece(piece, destination);
+        }
+
+        public void performMove(Position origin, Position destination)
+        {
+            executeMovement(origin, destination);
+            round++;
+            changePlayer();
+        }
+
+        private void changePlayer()
+        {
+            if(currrentPlayer == Color.White)
+            {
+                currrentPlayer = Color.Black;
+            }
+            else
+            {
+                currrentPlayer = Color.White;
+            }
         }
 
         private void putPieces()

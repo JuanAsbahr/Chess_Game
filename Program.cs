@@ -14,6 +14,10 @@ internal class Program
             {
                 Console.Clear();
                 Screen.printBoard(game.board);
+                Console.WriteLine();
+                Console.WriteLine("Round: " + game.round);
+                Console.WriteLine("Waiting for move: " + game.currrentPlayer);
+
 
                 Console.WriteLine();
                 Console.Write("Origin: ");
@@ -28,7 +32,7 @@ internal class Program
                 Console.Write("Destination: ");
                 Position destination = Screen.readPosition().toPosition();
 
-                game.executeMovement(origin, destination);
+                game.performMove(origin, destination);
             }
         }
         catch (BoardException e)
