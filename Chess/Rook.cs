@@ -13,10 +13,10 @@ namespace Chess_Game.Chess
             return "R";
         }
 
-        private bool canMove(Position pos)
+        private bool canMove(Position position)
         {
-            Piece p = board.piece(pos);
-            return p == null || p.color != color;
+            Piece piece = board.piece(position);
+            return piece == null || piece.color != color;
         }
         public override bool[,] possibleMoves()
         {

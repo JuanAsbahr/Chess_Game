@@ -34,6 +34,22 @@ namespace Chess_Game.Chess
             changePlayer();
         }
 
+        public void validateOriginPosition(Position pos)
+        {
+            if (board.piece(pos) == null)
+            {
+                throw new BoardException("No piece in chosen origin position!");
+            }
+            if (currrentPlayer != board.piece(pos).color)
+            {
+                throw new BoardException("The piece chosen is not yours!");
+            }
+            if (!board.piece(pos).hasPossibleMoves())
+            {
+                throw new BoardException("No moves possible!");
+            }
+        }
+
         private void changePlayer()
         {
             if(currrentPlayer == Color.White)
@@ -48,10 +64,14 @@ namespace Chess_Game.Chess
 
         private void putPieces()
         {
-            board.insertPiece(new Rook(board, Color.White), new ChessPosition('a', 1).toPosition());
+            board.insertPiece(new Rook(board, Color.White), new ChessPosition('c', 1).toPosition());
             board.insertPiece(new Rook(board, Color.White), new ChessPosition('c', 2).toPosition());
             board.insertPiece(new King(board, Color.White), new ChessPosition('d', 1).toPosition());
-;
+
+            board.insertPiece(new Rook(board, Color.White), new ChessPosition('d', 2).toPosition());
+            board.insertPiece(new Rook(board, Color.White), new ChessPosition('e', 2).toPosition());
+            board.insertPiece(new Rook(board, Color.White), new ChessPosition('e', 1).toPosition());
+
 
 
 

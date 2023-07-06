@@ -18,25 +18,25 @@
             return pieces[line, column];
         }
 
-        public Piece piece (Position pos)
+        public Piece piece (Position position)
         {
-            return pieces[pos.line, pos.column];
+            return pieces[position.line, position.column];
         }
 
-        public bool thereIsPiece(Position position)
+        public bool thereIsPiece(Position pos)
         {
-            validatePosition(position);
-            return piece(position) != null;
+            validatePosition(pos);
+            return piece(pos) != null;
         }
 
-        public void insertPiece (Piece piece, Position position)
+        public void insertPiece (Piece piece, Position pos)
         {
-            if(thereIsPiece(position))
+            if(thereIsPiece(pos))
             {
                 throw new BoardException("There is a piece in this position!");
             }
-            pieces[position.line, position.column] = piece;
-            piece.position = position;
+            pieces[pos.line, pos.column] = piece;
+            piece.position = pos;
         }
 
         public Piece removePiece(Position position)
@@ -45,10 +45,10 @@
             {
                 return null;
             }
-            Piece pos = piece(position);
-            pos.position = null;
+            Piece aux = piece(position);
+            aux.position = null;
             pieces[position.line, position.column] = null;
-            return pos;
+            return aux;
         }
 
         public bool validPosition(Position pos)
@@ -60,11 +60,11 @@
             return true;
         }
 
-        public void validatePosition(Position position)
+        public void validatePosition(Position pos)
         {
-            if (!validPosition(position))
+            if (!validPosition(pos))
             {
-                throw new BoardException("Invalid Position");
+                throw new BoardException("Invalid Position!");
             }
         }
     }
