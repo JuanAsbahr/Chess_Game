@@ -18,9 +18,9 @@
             return pieces[line, column];
         }
 
-        public Piece piece (Position position)
+        public Piece piece (Position pos)
         {
-            return pieces[position.Line, position.Column];
+            return pieces[pos.line, pos.column];
         }
 
         public bool thereIsPiece(Position position)
@@ -35,7 +35,7 @@
             {
                 throw new BoardException("There is a piece in this position!");
             }
-            pieces[position.Line, position.Column] = piece;
+            pieces[position.line, position.column] = piece;
             piece.position = position;
         }
 
@@ -47,13 +47,13 @@
             }
             Piece pos = piece(position);
             pos.position = null;
-            pieces[position.Line, position.Column] = null;
+            pieces[position.line, position.column] = null;
             return pos;
         }
 
-        public bool validPosition(Position position)
+        public bool validPosition(Position pos)
         {
-            if (position.Line<0 || position.Line>=lines || position.Column <0 || position.Column >= columns)
+            if (pos.line<0 || pos.line>=lines || pos.column <0 || pos.column >= columns)
             {
                 return false;
             }

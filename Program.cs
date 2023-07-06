@@ -18,6 +18,13 @@ internal class Program
                 Console.WriteLine();
                 Console.Write("Origin: ");
                 Position origin = Screen.readPosition().toPosition();
+
+                bool[,] possiblePositions = game.board.piece(origin).possibleMoves();
+
+                Console.Clear();
+                Screen.printBoard(game.board, possiblePositions);
+
+                Console.WriteLine();
                 Console.Write("Destination: ");
                 Position destination = Screen.readPosition().toPosition();
 

@@ -13,64 +13,64 @@ namespace Chess_Game.Chess
             return "K";
         }
 
-        private bool canMove(Position position)
+        private bool canMove(Position pos)
         {
-            Piece piece = board.piece(position);
-            return piece == null || piece.color != color;
+            Piece p = board.piece(pos);
+            return p == null || p.color != color;
         }
         public override bool[,] possibleMoves()
         {
             bool[,] matrix = new bool[board.lines, board.columns];
 
-            Position position = new Position(0, 0);
+            Position pos = new Position(0, 0);
 
             //North
-            position.setValues(position.Line - 1, position.Column);
-            if(board.validPosition(position) && canMove(position))
+            pos.setValues(position.line - 1, position.column);
+            if(board.validPosition(pos) && canMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
+                matrix[pos.line, pos.column] = true;
             }
             //North East
-            position.setValues(position.Line - 1, position.Column + 1);
-            if (board.validPosition(position) && canMove(position))
+            pos.setValues(position.line - 1, position.column + 1);
+            if (board.validPosition(pos) && canMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
+                matrix[pos.line, pos.column] = true;
             }
             //East
-            position.setValues(position.Line, position.Column + 1);
-            if (board.validPosition(position) && canMove(position))
+            pos.setValues(position.line, position.column + 1);
+            if (board.validPosition(pos) && canMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
+                matrix[pos.line, pos.column] = true;
             }
             //Southeast
-            position.setValues(position.Line + 1, position.Column + 1);
-            if (board.validPosition(position) && canMove(position))
+            pos.setValues(position.line + 1, position.column + 1);
+            if (board.validPosition(pos) && canMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
+                matrix[pos.line, pos.column] = true;
             }
             //South
-            position.setValues(position.Line + 1, position.Column);
-            if (board.validPosition(position) && canMove(position))
+            pos.setValues(position.line + 1, position.column);
+            if (board.validPosition(pos) && canMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
+                matrix[pos.line, pos.column] = true;
             }
             //South-West
-            position.setValues(position.Line + 1, position.Column - 1);
-            if (board.validPosition(position) && canMove(position))
+            pos.setValues(position.line + 1, position.column - 1);
+            if (board.validPosition(pos) && canMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
+                matrix[pos.line, pos.column] = true;
             }
             //West
-            position.setValues(position.Line, position.Column - 1);
-            if (board.validPosition(position) && canMove(position))
+            pos.setValues(position.line, position.column - 1);
+            if (board.validPosition(pos) && canMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
+                matrix[pos.line, pos.column] = true;
             }
             //Northwest
-            position.setValues(position.Line - 1, position.Column - 1);
-            if (board.validPosition(position) && canMove(position))
+            pos.setValues(position.line - 1, position.column - 1);
+            if (board.validPosition(pos) && canMove(pos))
             {
-                matrix[position.Line, position.Column] = true;
+                matrix[pos.line, pos.column] = true;
             }
             return matrix;
         }
