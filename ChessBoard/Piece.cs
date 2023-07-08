@@ -19,6 +19,10 @@
         {
             moves++;
         }
+        public void removeMoves()
+        {
+            moves--;
+        }
 
         public bool hasPossibleMoves()
         {
