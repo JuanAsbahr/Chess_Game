@@ -15,11 +15,7 @@ internal class Program
                 try
                 {
                     Console.Clear();
-                    Screen.printBoard(game.board);
-                    Console.WriteLine();
-                    Console.WriteLine("Round: " + game.round);
-                    Console.WriteLine("Waiting for move: " + game.currrentPlayer);
-
+                    Screen.printGame(game);
 
                     Console.WriteLine();
                     Console.Write("Origin: ");

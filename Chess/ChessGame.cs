@@ -17,11 +17,10 @@ namespace Chess_Game.Chess
             board = new Board(8,8);
             round = 1;
             currrentPlayer = Color.White;
-            pieces = new HashSet<Piece>();
-            pieces = new HashSet<Piece>();
-            putPieces(); 
             finished = false;
-
+            pieces = new HashSet<Piece>();
+            captured = new HashSet<Piece>();
+            putPieces(); 
         }
 
         public void executeMovement(Position origin, Position destination)
@@ -120,7 +119,7 @@ namespace Chess_Game.Chess
 
             insertNewPiece('a', 8, new Rook(board, Color.Black));
             insertNewPiece('h', 8, new Rook(board, Color.Black));
-             insertNewPiece('d', 8, new King(board, Color.Black));
+            insertNewPiece('d', 8, new King(board, Color.Black));
         }
     }
 }

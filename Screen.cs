@@ -1,6 +1,5 @@
 ﻿using System;
-using System.Globalization;
-using System.Security.Cryptography.X509Certificates;
+using System.Collections.Generic;
 using Chess_Game.Chess;
 using Chess_Game.ChessBoard;
 
@@ -8,6 +7,41 @@ namespace Chess_Game
 {
     internal class Screen
     {
+
+        public static void printGame(ChessGame game)
+        {
+            printBoard(game.board);
+            Console.WriteLine();
+            printCapturedPieces(game);
+            Console.WriteLine();
+            Console.WriteLine("Round: " + game.round);
+            Console.WriteLine("Waiting for move: " + game.currrentPlayer);
+        }
+
+        public static void printCapturedPieces(ChessGame game)
+        {
+            Console.WriteLine("Captured Pieces: ");
+            Console.Write("White: ");
+            printGroup(game.capturedPiece(Color.White));
+            Console.WriteLine();
+            Console.Write("Black: ");
+            ConsoleColor color = Console.ForegroundColor;
+            Console.ForegroundColor = ConsoleColor.Yellow;
+            printGroup(game.capturedPiece(Color.Black));
+            Console.ForegroundColor = color;
+            Console.WriteLine();
+        }
+
+       public static void printGroup(HashSet<Piece> group)
+        {
+            Console.Write("[");
+            foreach (Piece x in group)
+            {
+                Console.Write(x + " ");
+            }
+            Console.Write("]");
+        }
+
         public static void printBoard(Board board)
         {
             for (int i=0; i<board.lines; i++)
