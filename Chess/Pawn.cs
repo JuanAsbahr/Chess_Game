@@ -58,7 +58,7 @@ namespace Chess_Game.Chess
                 if (position.line == 3)
                 {
                     Position west = new Position(position.line, position.column - 1);
-                    if(board.validPosition(west) && opponent(west) && board.piece(west) == game.enPassantvulnerable)
+                    if (board.validPosition(west) && opponent(west) && board.piece(west) == game.enPassantvulnerable)
                     {
                         matrix[west.line - 1, west.column] = true;
                     }

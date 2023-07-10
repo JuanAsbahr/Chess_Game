@@ -5,7 +5,7 @@ namespace Chess_Game.Chess
     internal class ChessPosition
     {
         public char column { get; set; }
-        public int line { get; set; }   
+        public int line { get; set; }
 
         public ChessPosition(char column, int line)
         {

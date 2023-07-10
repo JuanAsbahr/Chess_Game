@@ -169,7 +169,7 @@ namespace Chess_Game.Chess
                 round++;
                 changePlayer();
             }
-            
+
 
             // # Special Move -> En Passant
             if (p is Pawn && (destination.line == origin.line - 2 || destination.line == origin.line - 2))
