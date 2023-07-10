@@ -4,8 +4,10 @@ namespace Chess_Game.Chess
 {
     internal class King : Piece
     {
-        public King (Board board, Color color): base(color,board)
+        private ChessGame game;
+        public King (Board board, Color color, ChessGame game): base(color,board)
         {
+            this.game = game;
         }
         public override string ToString()
         {
