@@ -40,6 +40,8 @@ internal class Program
                     Console.ReadLine();
                 }
             }
+            Console.Clear();
+            Screen.printGame(game);
         }
         catch (BoardException e)
         {

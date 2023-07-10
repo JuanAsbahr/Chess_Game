@@ -67,8 +67,15 @@ namespace Chess_Game.Chess
             {
                 check = false;
             }
-            round++;
-            changePlayer();
+            if (checkMate(opponent(currrentPlayer)))
+            {
+                finished = true;
+            }
+            else
+            {
+                round++;
+                changePlayer();
+            }
         }
 
         public void validateOriginPosition(Position pos)
@@ -176,6 +183,37 @@ namespace Chess_Game.Chess
             return false;
         }
 
+        public bool checkMate(Color color)
+        {
+            if(!isInCheck(color))
+            {
+                return false;
+            }
+            foreach (Piece x in inGame(color))
+            {
+                bool[,] mat = x.possibleMoves();
+                for(int i=0; i<board.lines;  i++)
+                {
+                    for(int j=0; j<board.columns; j++)
+                    {
+                        if (mat[i, j])
+                        {
+                            Position origin = x.position;
+                            Position destination = new Position(i,j);
+                            Piece capturedPiece = executeMovement(origin, destination);
+                            bool checkTest = isInCheck(color);
+                            undoMove(origin, destination, capturedPiece);
+                            if (!checkTest)
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                }
+            }
+            return true;
+        }
+
         public void insertNewPiece(char column, int line, Piece piece)
         {
             board.insertPiece(piece, new ChessPosition(column, line).toPosition());
@@ -184,13 +222,13 @@ namespace Chess_Game.Chess
 
         private void putPieces()
         {
-            insertNewPiece('a',1, new Rook(board,Color.White));
-            insertNewPiece('h', 1, new Rook(board, Color.White));
+            insertNewPiece('h',7, new Rook(board,Color.White));
+            insertNewPiece('c', 1, new Rook(board, Color.White));
             insertNewPiece('d', 1, new King(board, Color.White));
 
-            insertNewPiece('a', 8, new Rook(board, Color.Black));
-            insertNewPiece('h', 8, new Rook(board, Color.Black));
-            insertNewPiece('d', 8, new King(board, Color.Black));
+            insertNewPiece('b', 8, new Rook(board, Color.Black));
+            insertNewPiece('f', 8, new Rook(board, Color.Black));
+            insertNewPiece('a', 8, new King(board, Color.Black));
         }
     }
 }
