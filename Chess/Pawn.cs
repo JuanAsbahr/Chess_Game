@@ -53,6 +53,22 @@ namespace Chess_Game.Chess
                 {
                     matrix[pos.line, pos.column] = true;
                 }
+
+                // # Special Move -> En Passant
+                if (position.line == 3)
+                {
+                    Position west = new Position(position.line, position.column - 1);
+                    if(board.validPosition(west) && opponent(west) && board.piece(west) == game.enPassantvulnerable)
+                    {
+                        matrix[west.line - 1, west.column] = true;
+                    }
+                    Position east = new Position(position.line, position.column + 1);
+                    if (board.validPosition(east) && opponent(east) && board.piece(east) == game.enPassantvulnerable)
+                    {
+                        matrix[east.line - 1, east.column] = true;
+                    }
+                }
+
             }
             else
             {
@@ -76,6 +92,20 @@ namespace Chess_Game.Chess
                 if (board.validPosition(pos) && opponent(pos))
                 {
                     matrix[pos.line, pos.column] = true;
+                }
+                // # Special Move -> En Passant
+                if (position.line == 4)
+                {
+                    Position west = new Position(position.line, position.column - 1);
+                    if (board.validPosition(west) && opponent(west) && board.piece(west) == game.enPassantvulnerable)
+                    {
+                        matrix[west.line + 1, west.column] = true;
+                    }
+                    Position east = new Position(position.line, position.column + 1);
+                    if (board.validPosition(east) && opponent(east) && board.piece(east) == game.enPassantvulnerable)
+                    {
+                        matrix[east.line + 1, east.column] = true;
+                    }
                 }
             }
             return matrix;

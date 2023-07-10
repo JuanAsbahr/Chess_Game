@@ -12,12 +12,14 @@ namespace Chess_Game.Chess
         private HashSet<Piece> pieces;
         private HashSet<Piece> captured;
         public bool check { get; private set; }
+        public Piece enPassantvulnerable { get; private set; }
 
         public ChessGame()
         {
             board = new Board(8, 8);
             round = 1;
             currrentPlayer = Color.White;
+            enPassantvulnerable = null;
             finished = false;
             check = false;
             pieces = new HashSet<Piece>();
@@ -55,6 +57,24 @@ namespace Chess_Game.Chess
                 board.insertPiece(rook, rookDestination);
             }
 
+            // # Special Move -> En Passant
+            if (piece is Pawn)
+            {
+                if (origin.column != destination.column && caputuredPiece == null)
+                {
+                    Position posP;
+                    if (piece.color == Color.White)
+                    {
+                        posP = new Position(destination.line + 1, destination.column);
+                    }
+                    else
+                    {
+                        posP = new Position(destination.line - 1, destination.column);
+                    }
+                    caputuredPiece = board.removePiece(posP);
+                    captured.Add(caputuredPiece);
+                }
+            }
             return caputuredPiece;
         }
 
@@ -87,6 +107,25 @@ namespace Chess_Game.Chess
                 rook.removeMoves();
                 board.insertPiece(rook, rookOrigin);
             }
+            // # Special Move -> En Passant
+            if (piece is Pawn)
+            {
+                if (origin.column != destination.column && capuredPiece == enPassantvulnerable)
+                {
+                    Piece pawn = board.removePiece(destination);
+                    Position posP;
+                    if (piece.color == Color.White)
+                    {
+                        posP = new Position(3, destination.column);
+                    }
+                    else
+                    {
+                        posP = new Position(4, destination.column);
+                    }
+                    board.insertPiece(pawn, posP);
+                }
+            }
+
         }
 
         public void performMove(Position origin, Position destination)
@@ -115,6 +154,18 @@ namespace Chess_Game.Chess
                 round++;
                 changePlayer();
             }
+            Piece p = board.piece(destination);
+
+            // # Special Move -> En Passant
+            if (p is Pawn && (destination.line == origin.line - 2 || destination.line == origin.line - 2))
+            {
+                enPassantvulnerable = p;
+            }
+            else
+            {
+                enPassantvulnerable = null;
+            }
+
         }
 
         public void validateOriginPosition(Position pos)
