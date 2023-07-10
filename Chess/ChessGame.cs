@@ -167,8 +167,8 @@ namespace Chess_Game.Chess
             }
             foreach (Piece x in inGame(opponent(color)))
             {
-                bool[,] matrix = x.possibleMoves();
-                if (matrix[K.position.line, K.position.column])
+                bool[,] mat = x.possibleMoves();
+                if (mat[K.position.line, K.position.column])
                 {
                     return true;
                 }
