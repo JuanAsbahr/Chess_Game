@@ -15,14 +15,14 @@ namespace Chess_Game.Chess
 
         public ChessGame()
         {
-            board = new Board(8,8);
+            board = new Board(8, 8);
             round = 1;
             currrentPlayer = Color.White;
             finished = false;
             check = false;
             pieces = new HashSet<Piece>();
             captured = new HashSet<Piece>();
-            putPieces(); 
+            putPieces();
         }
 
         public Piece executeMovement(Position origin, Position destination)
@@ -35,6 +35,26 @@ namespace Chess_Game.Chess
             {
                 captured.Add(caputuredPiece);
             }
+
+            // # Special Move -> Kingside castling
+            if (piece is King && destination.column == origin.column + 2)
+            {
+                Position rookOrigin = new Position(origin.line, origin.column + 3);
+                Position rookDestination = new Position(origin.line, origin.column + 1);
+                Piece rook = board.removePiece(rookOrigin);
+                rook.addMoves();
+                board.insertPiece(rook, rookDestination);
+            }
+            // # Special Move -> Queenside castling
+            if (piece is King && destination.column == origin.column - 2)
+            {
+                Position rookOrigin = new Position(origin.line, origin.column - 4);
+                Position rookDestination = new Position(origin.line, origin.column - 1);
+                Piece rook = board.removePiece(rookOrigin);
+                rook.addMoves();
+                board.insertPiece(rook, rookDestination);
+            }
+
             return caputuredPiece;
         }
 
@@ -48,6 +68,25 @@ namespace Chess_Game.Chess
                 captured.Remove(capuredPiece);
             }
             board.insertPiece(piece, origin);
+
+            // # Special Move -> Kingside castling
+            if (piece is King && destination.column == origin.column + 2)
+            {
+                Position rookOrigin = new Position(origin.line, origin.column + 3);
+                Position rookDestination = new Position(origin.line, origin.column + 1);
+                Piece rook = board.removePiece(rookDestination);
+                rook.removeMoves();
+                board.insertPiece(rook, rookOrigin);
+            }
+            // # Special Move -> Queenside castling
+            if (piece is King && destination.column == origin.column - 2)
+            {
+                Position rookOrigin = new Position(origin.line, origin.column - 4);
+                Position rookDestination = new Position(origin.line, origin.column - 1);
+                Piece rook = board.removePiece(rookDestination);
+                rook.removeMoves();
+                board.insertPiece(rook, rookOrigin);
+            }
         }
 
         public void performMove(Position origin, Position destination)
@@ -104,7 +143,7 @@ namespace Chess_Game.Chess
 
         private void changePlayer()
         {
-            if(currrentPlayer == Color.White)
+            if (currrentPlayer == Color.White)
             {
                 currrentPlayer = Color.Black;
             }
@@ -114,7 +153,7 @@ namespace Chess_Game.Chess
             }
         }
 
-        public HashSet<Piece> capturedPiece (Color color)
+        public HashSet<Piece> capturedPiece(Color color)
         {
             HashSet<Piece> result = new HashSet<Piece>();
             foreach (Piece x in captured)
@@ -134,7 +173,7 @@ namespace Chess_Game.Chess
             {
                 if (x.color == color)
                 {
-                    result.Add(x);     
+                    result.Add(x);
                 }
             }
             result.ExceptWith(capturedPiece(color));
@@ -185,21 +224,21 @@ namespace Chess_Game.Chess
 
         public bool checkMate(Color color)
         {
-            if(!isInCheck(color))
+            if (!isInCheck(color))
             {
                 return false;
             }
             foreach (Piece x in inGame(color))
             {
                 bool[,] mat = x.possibleMoves();
-                for(int i=0; i<board.lines;  i++)
+                for (int i = 0; i < board.lines; i++)
                 {
-                    for(int j=0; j<board.columns; j++)
+                    for (int j = 0; j < board.columns; j++)
                     {
                         if (mat[i, j])
                         {
                             Position origin = x.position;
-                            Position destination = new Position(i,j);
+                            Position destination = new Position(i, j);
                             Piece capturedPiece = executeMovement(origin, destination);
                             bool checkTest = isInCheck(color);
                             undoMove(origin, destination, capturedPiece);
@@ -222,11 +261,11 @@ namespace Chess_Game.Chess
 
         private void putPieces()
         {
-            
-            insertNewPiece('a',1, new Rook(board,Color.White));
+
+            insertNewPiece('a', 1, new Rook(board, Color.White));
             insertNewPiece('h', 1, new Rook(board, Color.White));
-            insertNewPiece('d', 1, new King(board, Color.White, this));
-            insertNewPiece('e', 1, new Queen(board, Color.White));
+            insertNewPiece('e', 1, new King(board, Color.White, this));
+            insertNewPiece('d', 1, new Queen(board, Color.White));
             insertNewPiece('c', 1, new Bishop(board, Color.White));
             insertNewPiece('f', 1, new Bishop(board, Color.White));
             insertNewPiece('b', 1, new Horse(board, Color.White));
@@ -240,11 +279,11 @@ namespace Chess_Game.Chess
             insertNewPiece('g', 2, new Pawn(board, Color.White, this));
             insertNewPiece('h', 2, new Pawn(board, Color.White, this));
 
-           
+
             insertNewPiece('a', 8, new Rook(board, Color.Black));
             insertNewPiece('h', 8, new Rook(board, Color.Black));
-            insertNewPiece('d', 8, new King(board, Color.Black, this));
-            insertNewPiece('e', 8, new Queen(board, Color.Black));
+            insertNewPiece('e', 8, new King(board, Color.Black, this));
+            insertNewPiece('d', 8, new Queen(board, Color.Black));
             insertNewPiece('c', 8, new Bishop(board, Color.Black));
             insertNewPiece('f', 8, new Bishop(board, Color.Black));
             insertNewPiece('b', 8, new Horse(board, Color.Black));
