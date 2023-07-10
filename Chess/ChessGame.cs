@@ -137,6 +137,21 @@ namespace Chess_Game.Chess
                 undoMove(origin, destination, capturedPiece);
                 throw new BoardException("You cannot put yourself in check!");
             }
+            Piece p = board.piece(destination);
+
+            // # Special Move -> Pawn Promove
+            if (p is Pawn)
+            {
+                if ((p.color == Color.White && destination.line == 0) || (p.color == Color.Black && destination.line == 7))
+                {
+                    p = board.removePiece(destination);
+                    pieces.Remove(p);
+                    Piece queen = new Queen(board, p.color);
+                    board.insertPiece(queen, destination);
+                    pieces.Add(queen);
+                }
+            }
+
             if (isInCheck(opponent(currrentPlayer)))
             {
                 check = true;
@@ -154,7 +169,7 @@ namespace Chess_Game.Chess
                 round++;
                 changePlayer();
             }
-            Piece p = board.piece(destination);
+            
 
             // # Special Move -> En Passant
             if (p is Pawn && (destination.line == origin.line - 2 || destination.line == origin.line - 2))
