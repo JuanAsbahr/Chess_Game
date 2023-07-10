@@ -2,14 +2,14 @@
 
 namespace Chess_Game.Chess
 {
-    internal class King : Piece
+    internal class Horse : Piece
     {
-        public King (Board board, Color color): base(color,board)
+        public Horse(Board board, Color color) : base(color, board)
         {
         }
         public override string ToString()
         {
-            return "K";
+            return "H";
         }
 
         private bool canMove(Position pos)
@@ -24,49 +24,49 @@ namespace Chess_Game.Chess
             Position pos = new Position(0, 0);
 
             //North
-            pos.setValues(position.line - 1, position.column);
-            if(board.validPosition(pos) && canMove(pos))
+            pos.setValues(position.line - 1, position.column - 2);
+            if (board.validPosition(pos) && canMove(pos))
             {
                 matrix[pos.line, pos.column] = true;
             }
             //North East
-            pos.setValues(position.line - 1, position.column + 1);
+            pos.setValues(position.line - 2, position.column - 1);
             if (board.validPosition(pos) && canMove(pos))
             {
                 matrix[pos.line, pos.column] = true;
             }
             //East
-            pos.setValues(position.line, position.column + 1);
+            pos.setValues(position.line - 2, position.column + 1);
             if (board.validPosition(pos) && canMove(pos))
             {
                 matrix[pos.line, pos.column] = true;
             }
             //Southeast
-            pos.setValues(position.line + 1, position.column + 1);
+            pos.setValues(position.line - 1, position.column + 2);
             if (board.validPosition(pos) && canMove(pos))
             {
                 matrix[pos.line, pos.column] = true;
             }
             //South
-            pos.setValues(position.line + 1, position.column);
+            pos.setValues(position.line + 1, position.column + 2);
             if (board.validPosition(pos) && canMove(pos))
             {
                 matrix[pos.line, pos.column] = true;
             }
             //South-West
-            pos.setValues(position.line + 1, position.column - 1);
+            pos.setValues(position.line + 2, position.column + 1);
             if (board.validPosition(pos) && canMove(pos))
             {
                 matrix[pos.line, pos.column] = true;
             }
             //West
-            pos.setValues(position.line, position.column - 1);
+            pos.setValues(position.line + 2, position.column - 1);
             if (board.validPosition(pos) && canMove(pos))
             {
                 matrix[pos.line, pos.column] = true;
             }
             //Northwest
-            pos.setValues(position.line - 1, position.column - 1);
+            pos.setValues(position.line + 1, position.column - 2);
             if (board.validPosition(pos) && canMove(pos))
             {
                 matrix[pos.line, pos.column] = true;

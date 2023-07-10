@@ -1,5 +1,4 @@
-﻿using System;
-using Chess_Game.ChessBoard;
+﻿using Chess_Game.ChessBoard;
 
 namespace Chess_Game.Chess
 {
